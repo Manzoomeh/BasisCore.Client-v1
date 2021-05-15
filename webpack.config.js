@@ -12,6 +12,7 @@ module.exports = {
   output: {
     filename: "[name].js",
   },
+
   // output: {
   //   filename: "basiscore.min.js",
   //   //library: "$bc",
