@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BasisCore Client Demo Page</title>
+
+    <script src="basiscore.js" defer></script>
+  </head>
+  <body>
+    <h1>BasisCore Client Demo Page</h1>
+    <basis
+      core="tree"
+      datamembername="serverdata.tree"
+      idcol="id"
+      parentidcol="pid"
+      nullvalue="null"
+      run="atclient"
+    >
+      <layout>
+        <ul data-hi>
+          @child
+        </ul>
+      </layout>
+      <face level="end" replace="true">
+        <li data-end-like><a href="/@name">[(bold)@id - @name]</a></li>
+      </face>
+      <face level="2">
+        <li data-end-like>
+          <a href="/@name">@id - @name Level2</a>
+          <ul>
+            @child
+          </ul>
+        </li>
+      </face>
+      <face replace="true">
+        <li data-else class="dropdown_233">
+          [(lInk)@name|/@name]
+          <ul>
+            @child
+          </ul>
+        </li>
+      </face>
+      <replace tagname="linK">
+        <a href="@val2"> Click For @val1 {##serverdata.print.id##}</a>
+      </replace>
+
+      <replace tagname="bold">
+        <b class="u-fade js-anim @val2"> @val1 </b>
+      </replace>
+      <replace tagname="bold">
+        <b class="u-fade js-anim @val2"> @val1 </b>
+      </replace>
+    </basis>
+
+    <basis
+      core="dbsource"
+      source="basiscore"
+      name="serverdata"
+      mid="20"
+      lid="1"
+      run="atclient"
+      spellcheck="{##cms.query.p##}"
+    >
+      <member type="list" name="view" />
+      <member type="list" name="tree" />
+      <member
+        type="list"
+        name="print"
+        sort="rownumber desc"
+        postsql="Select *,'?' as 'k',id+'-'+name as 'g'  from [Serverdata.Print] where id = 1"
+      />
+      <member type="list" name="param" />
+      <member type="list" name="aaa" />
+      <member type="list" name="aaa1" />
+    </basis>
+
+    <script>
+      var host = {
+        Debug: true,
+        DbLibPath: "alasql.min.js",
+        Settings: {
+          "connection.web.basiscore1": {
+            Connection: "data1.json",
+            Heartbeat: "data1.json?check=true",
+          },
+          "connection.web.basiscore": {
+            Connection: "data.json",
+            Heartbeat: "data.json?check=true",
+          },
+          "default.source.verb": "get",
+          "default.dmnid": "4312",
+          "default.viewCommand.groupColumn": "prpid",
+          "default.binding.regex": "\\{##([^#]*)##\\}",
+        },
+        Sources: {
+          "cms.user": [
+            ["id", "name", "rkey"],
+            ["22", "qamsari", "123"],
+          ],
+          "inlinesource.TempTable": [
+            ["id", "name", "prpid"],
+            ["1", "qamsari", null],
+            ["3", "akaberi", 1],
+            ["5", "amir", 3],
+          ],
+        },
+      };
+    </script>
+  </body>
+</html>
