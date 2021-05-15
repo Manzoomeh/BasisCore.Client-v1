@@ -4,7 +4,6 @@ const CopyPlugin = require("copy-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
-  //entry: "./src/index.ts",
   entry: {
     basiscore: "./src/index.ts",
     "basiscore.min": "./src/index.ts",
@@ -46,7 +45,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".ts", ".d.ts", ".tsx", ".js", ".jsx", ".css"], // there's a dot missing
+    extensions: [".ts", ".d.ts", ".tsx", ".js", ".jsx", ".css"],
   },
   plugins: [
     //   new CircularDependencyPlugin({
